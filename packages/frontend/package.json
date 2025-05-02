@@ -1,0 +1,25 @@
+{
+    "name": "@aecomjots/frontend",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@clerk/astro": "^2.6.11",
+        "@clerk/themes": "^2.2.38",
+        "@typescript-eslint/parser": "^8.31.1",
+        "astro": "^5.7.10",
+        "astro-compressor": "^1.0.0",
+        "astro-sst": "^3.1.3",
+        "eslint": "^9.25.1",
+        "eslint-plugin-astro": "^1.3.1",
+        "eslint-plugin-jsx-a11y": "^6.10.2",
+        "jiti": "^2.4.2",
+        "prettier": "^3.5.3",
+        "prettier-plugin-astro": "^0.14.1"
+    }
+}

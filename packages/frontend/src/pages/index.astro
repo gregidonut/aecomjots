@@ -1,0 +1,48 @@
+---
+import type { JSX } from "astro/jsx-runtime";
+
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/header/Header.astro";
+import Main from "@/components/main/Main.astro";
+
+import { linkTable } from "@/assets/importantLinks.json";
+
+const toc = [
+    ["callFlow", "/callFlow"],
+    ["ticketingPointers", "/ticketingPointers"],
+];
+---
+
+<Layout>
+    <Header />
+    <Main>
+        <section>
+            <h2>table of contents</h2>
+            <ul>
+                {
+                    toc.map(function (p): JSX.Element {
+                        return (
+                            <li>
+                                <a href={p[1]}>{p[0]}</a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </section>
+        <section>
+            <h2>important links</h2>
+            <ul>
+                {
+                    linkTable.map(function (ld): JSX.Element {
+                        return (
+                            <li>
+                                <a href={ld[1]}>{ld[0]}</a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </section>
+    </Main>
+</Layout>
