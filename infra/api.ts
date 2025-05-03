@@ -1,4 +1,4 @@
-import { database } from "./db";
+import { vpc, database } from "./db";
 
 const ClerkJWTAuthorizerAud = new sst.Secret("ClerkJWTAuthorizer");
 const ClerkDevAccountDefaultEndpoint = new sst.Secret(
@@ -38,6 +38,7 @@ function addProtectedGoRoute(rawRoute: string, handler: string): void {
         POSTGRES_DATABASE: database.database,
         POSTGRES_HOST: database.host,
       },
+      vpc,
     },
     {
       auth: {

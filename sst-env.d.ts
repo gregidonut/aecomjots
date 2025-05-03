@@ -41,7 +41,6 @@ declare module "sst" {
       "username": string
     }
     "aecomjotsPostgresVpc": {
-      "bastion": string
       "type": "sst.aws.Vpc"
     }
   }
