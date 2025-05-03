@@ -5,6 +5,8 @@ import aws from "astro-sst";
 import compressor from "astro-compressor";
 import { shadesOfPurple } from "@clerk/themes";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
     integrations: [
@@ -14,6 +16,7 @@ export default defineConfig({
                 baseTheme: shadesOfPurple,
             },
         }),
+        react(),
     ],
 
     output: "server",
@@ -21,3 +24,4 @@ export default defineConfig({
         responseMode: "stream",
     }),
 });
+

@@ -5,35 +5,17 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/header/Header.astro";
 import Main from "@/components/main/Main.astro";
 
-import { linkTable } from "@/assets/importantLinks.json";
+import LinksWrapper from "@/components/importanLinks/LinksWrapper";
 
 const toc = [
     ["callFlow", "/callFlow"],
     ["ticketingPointers", "/ticketingPointers"],
 ];
-
-const { getToken } = Astro.locals.auth();
-const token = await getToken();
-
-const apiUrl = `${import.meta.env.ASTRO_API_URL}/links`;
-const resp = await fetch(apiUrl, {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${token}`,
-    },
-});
-
-const data = await resp.json();
 ---
 
 <Layout>
     <Header />
     <Main>
-        <section>
-            <h2>test</h2>
-            <p>invoke:</p>
-            <pre>{JSON.stringify( data, null, 4 )}</pre>
-        </section>
         <section>
             <h2>table of contents</h2>
             <ul>
@@ -50,17 +32,7 @@ const data = await resp.json();
         </section>
         <section>
             <h2>important links</h2>
-            <ul>
-                {
-                    linkTable.map(function (ld): JSX.Element {
-                        return (
-                            <li>
-                                <a href={ld[1]}>{ld[0]}</a>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
+            <LinksWrapper client:only="react" />
         </section>
     </Main>
 </Layout>
