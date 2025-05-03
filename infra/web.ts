@@ -1,3 +1,5 @@
+import { api } from "./api";
+
 const region = aws.getRegionOutput().name;
 
 const clerkPublic = new sst.Secret("ClerkPublicKey");
@@ -12,6 +14,7 @@ export const frontend = new sst.aws.Astro("Frontend", {
     PUBLIC_CLERK_PUBLISHABLE_KEY: clerkPublic.value,
     CLERK_SECRET_KEY: clerkSecret.value,
     CLERK_SIGN_IN_URL: "/sign-in",
+    ASTRO_API_URL: api.url,
   },
   domain: {
     name: process.env.ASTRO_APP_DOMAIN,

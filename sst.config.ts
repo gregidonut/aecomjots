@@ -10,10 +10,13 @@ export default $config({
     };
   },
   async run() {
+    const database = await import("./infra/db");
+    const api = await import("./infra/api");
     await import("./infra/web");
 
     return {
-      hayup: "ka",
+      apiUrl: api.api.url,
+      db: database,
     };
   },
 });
