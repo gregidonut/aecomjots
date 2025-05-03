@@ -27,6 +27,7 @@ const ClerkJWTAuthorizerVar = api.addAuthorizer({
 });
 
 function addProtectedGoRoute(rawRoute: string, handler: string): void {
+  const isDev = process.env.SST_STAGE === "dev";
   api.route(
     rawRoute,
     {
@@ -37,8 +38,9 @@ function addProtectedGoRoute(rawRoute: string, handler: string): void {
         POSTGRES_PASSWORD: database.password,
         POSTGRES_DATABASE: database.database,
         POSTGRES_HOST: database.host,
+        SST_STage: process.env.SST_STAGE,
       },
-      vpc,
+      ...(isDev ? {} : { vpc }), // include `vpc` only if not in dev
     },
     {
       auth: {

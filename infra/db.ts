@@ -9,5 +9,11 @@ export const database = new sst.aws.Aurora("aecomjotsPostgresDb", {
     max: "1 ACU",
     pauseAfter: "300 seconds",
   },
+  dev: {
+    username: "postgres",
+    password: "password",
+    database: "local",
+    port: 5433,
+  },
   vpc,
 });

@@ -15,19 +15,25 @@ import (
 )
 
 const (
-	POSTGRES_PORT = 5432
+	POSTGRES_PORT     = 5432
+	POSTGRES_PORT_DEV = 5433
 )
 
 var (
 	POSTGRES_USERNAME = os.Getenv("POSTGRES_USERNAME")
 	POSTGRES_PASSWORD = os.Getenv("POSTGRES_PASSWORD")
-	POSTGRES_DATABASE = os.Getenv("postgres")
+	POSTGRES_DATABASE = os.Getenv("POSTGRES_DATABASE")
 	POSTGRES_HOST     = os.Getenv("POSTGRES_HOST")
+	SST_STAGE         = os.Getenv("SST_STAGE")
 )
 
 func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// connection string
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DATABASE)
+	var psqlconn string
+	psqlconn = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DATABASE)
+	if SST_STAGE == "dev" {
+		psqlconn = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", POSTGRES_HOST, POSTGRES_PORT_DEV, POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DATABASE)
+	}
 
 	// open database
 	db, err := sql.Open("postgres", psqlconn)
