@@ -1,0 +1,12 @@
+.templatesList {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tListItem header {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: row;
+    gap: 1rem;
+}

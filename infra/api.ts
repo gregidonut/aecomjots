@@ -52,4 +52,11 @@ function addProtectedGoRoute(rawRoute: string, handler: string): void {
   );
 }
 
-addProtectedGoRoute("GET /links", "packages/functions/cmd/links/main.go");
+addProtectedGoRoute(
+  "GET /links",
+  "packages/functions/cmd/handlers/links/main.go",
+);
+addProtectedGoRoute(
+  "GET /templates",
+  "packages/functions/cmd/handlers/templates/main.go",
+);

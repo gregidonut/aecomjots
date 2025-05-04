@@ -7,9 +7,9 @@ import Table from "./table/Table.tsx";
 
 export default function Links(): React.JSX.Element {
     const { data: linkTable, isLoading } = useQuery<Link[]>({
-        queryKey: ["getLinks"],
+        queryKey: ["links"],
         queryFn: async function () {
-            const resp = await fetch("/api/getLinks");
+            const resp = await fetch("/api/links");
             return await resp.json();
         },
     });

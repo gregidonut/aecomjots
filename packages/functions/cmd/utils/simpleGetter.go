@@ -1,17 +1,12 @@
-package main
+package utils
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
+	"github.com/aws/aws-lambda-go/events"
 	"os"
 
-	"github.com/gregidonut/aecomjots/packages/functions/cmd/utils"
-
 	_ "github.com/lib/pq"
-
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
 )
 
 const (
@@ -27,7 +22,7 @@ var (
 	SST_STAGE         = os.Getenv("SST_STAGE")
 )
 
-func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func Get(stmt string) (events.APIGatewayProxyResponse, error) {
 	// connection string
 	var psqlconn string
 	psqlconn = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DATABASE)
@@ -38,28 +33,21 @@ func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.A
 	// open database
 	db, err := sql.Open("postgres", psqlconn)
 	if err != nil {
-		return utils.APIServerError(err)
+		return APIServerError(err)
 	}
 	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
-		return utils.APIServerError(err)
+		return APIServerError(err)
 	}
 	var jsonData []byte
 
-	stmt := `
-SELECT json_agg(row_to_json(t))
-FROM (
-  SELECT name, url, cc FROM links
-) t;
-`
-
 	if err := db.QueryRow(stmt).Scan(&jsonData); err != nil {
 		if err.Error() == "pq: relation \"links\" does not exist" {
-			return utils.APIServerError(fmt.Errorf("%w  database: %s", err, POSTGRES_DATABASE))
+			return APIServerError(fmt.Errorf("%w  database: %s", err, POSTGRES_DATABASE))
 		}
-		return utils.APIServerError(err)
+		return APIServerError(err)
 	}
 
 	return events.APIGatewayProxyResponse{
@@ -67,8 +55,4 @@ FROM (
 		Body:       string(jsonData),
 		Headers:    map[string]string{"Content-Type": "application/json"},
 	}, nil
-}
-
-func main() {
-	lambda.Start(handler)
 }
