@@ -1,15 +1,10 @@
 {
   "name": "aecomjots",
-  "version": "0.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {},
-  "devDependencies": {
-    "@tsconfig/node22": "^22",
-    "typescript": "^5"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "sst": "^3"
-  }
+  "private": true
 }

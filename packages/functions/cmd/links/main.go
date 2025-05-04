@@ -56,6 +56,9 @@ FROM (
 `
 
 	if err := db.QueryRow(stmt).Scan(&jsonData); err != nil {
+		if err.Error() == "pq: relation \"links\" does not exist" {
+			return utils.APIServerError(fmt.Errorf("%w  database: %s", err, POSTGRES_DATABASE))
+		}
 		return utils.APIServerError(err)
 	}
 

@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { Link } from "@/utils/models";
+import Table from "./table/Table.tsx";
 
 export default function Links(): React.JSX.Element {
     const { data: linkTable, isLoading } = useQuery<Link[]>({
@@ -21,15 +22,5 @@ export default function Links(): React.JSX.Element {
         return <p>no links found</p>;
     }
 
-    return (
-        <ul>
-            {linkTable.map(function (ld: Link) {
-                return (
-                    <li key={ld.link_id}>
-                        <a href={ld.url}>{ld.name}</a>
-                    </li>
-                );
-            })}
-        </ul>
-    );
+    return <Table d={linkTable} />;
 }

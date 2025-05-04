@@ -5,9 +5,7 @@ import Links from "./Links";
 
 const queryClient = new QueryClient();
 
-export default function LinksWrapper(
-    props: React.PropsWithChildren,
-): React.JSX.Element {
+export default function LinksWrapper(): React.JSX.Element {
     return (
         <QueryClientProvider client={queryClient}>
             <Links />

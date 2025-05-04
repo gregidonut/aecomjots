@@ -5,7 +5,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/header/Header.astro";
 import Main from "@/components/main/Main.astro";
 
-import LinksWrapper from "@/components/importanLinks/LinksWrapper";
+import Links from "@/components/importanLinks/LinksWrapper";
 
 const toc = [
     ["callFlow", "/callFlow"],
@@ -32,7 +32,7 @@ const toc = [
         </section>
         <section>
             <h2>important links</h2>
-            <LinksWrapper client:only="react" />
+            <Links client:only="react" />
         </section>
     </Main>
 </Layout>
