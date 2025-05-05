@@ -28,4 +28,22 @@ export class Link {
         this.cc = source["cc"];
     }
 }
+export class NoteTop {
+    name: string;
+    callback_n: string;
+    best_contact_time: string;
+    location: string;
+    affected_user_count: number;
+    issue: string;
+
+    constructor(source: any = {}) {
+        if ("string" === typeof source) source = JSON.parse(source);
+        this.name = source["name"];
+        this.callback_n = source["callback_n"];
+        this.best_contact_time = source["best_contact_time"];
+        this.location = source["location"];
+        this.affected_user_count = source["affected_user_count"];
+        this.issue = source["issue"];
+    }
+}
 

@@ -3,13 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/header/Header.astro";
 import Main from "@/components/main/Main.astro";
 
-import Templates from "@/components/ticketingTemplates/TemplatesWrapper";
+import ReactPage from "@/pages/ticketingPointers/reactPage/_ReactPageWrapper";
 ---
 
 <Layout>
     <Header />
     <Main>
         <h2>ticketing pointers</h2>
-        <Templates client:only="react" />
+        <ReactPage client:only="react" />
     </Main>
 </Layout>
