@@ -1,6 +1,16 @@
 .templatesList {
     list-style: none;
     padding-left: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, 22rem);
+    gap: 5rem;
+}
+
+@media screen and (min-width: 80rem) {
+    .templatesList {
+        grid-template-columns: repeat(4, 22rem);
+    }
 }
 
 .tListItem header {
@@ -9,4 +19,13 @@
     justify-content: start;
     flex-direction: row;
     gap: 1rem;
+}
+
+.tListItem main p textarea {
+    height: 40rem;
+    font-size: 0.9rem;
+    padding: 0.3rem;
+
+    background: #282a36ff;
+    color: #f8f8f2;
 }

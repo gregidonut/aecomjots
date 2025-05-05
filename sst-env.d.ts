@@ -5,44 +5,6 @@
 
 declare module "sst" {
   export interface Resource {
-    "Api": {
-      "type": "sst.aws.ApiGatewayV2"
-      "url": string
-    }
-    "ClerkDevAccountDefaultEndpoint": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "ClerkJWTAuthorizer": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "ClerkPublicKey": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "ClerkSecretKey": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "Frontend": {
-      "type": "sst.aws.Astro"
-      "url": string
-    }
-    "aecomjotsPostgresDb": {
-      "clusterArn": string
-      "database": string
-      "host": string
-      "password": string
-      "port": number
-      "reader": string
-      "secretArn": string
-      "type": "sst.aws.Aurora"
-      "username": string
-    }
-    "aecomjotsPostgresVpc": {
-      "type": "sst.aws.Vpc"
-    }
   }
 }
 /// <reference path="sst-env.d.ts" />

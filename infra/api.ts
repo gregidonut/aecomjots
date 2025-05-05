@@ -38,7 +38,7 @@ function addProtectedGoRoute(rawRoute: string, handler: string): void {
         POSTGRES_PASSWORD: database.password,
         POSTGRES_DATABASE: database.database,
         POSTGRES_HOST: database.host,
-        SST_STage: process.env.SST_STAGE,
+        SST_STAGE: process.env.SST_STAGE,
       },
       ...(isDev ? {} : { vpc }), // include `vpc` only if not in dev
     },
