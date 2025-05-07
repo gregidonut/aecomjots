@@ -52,8 +52,8 @@ export default function ReactPageWrapper(): React.JSX.Element {
             }}
         >
             <section className={styles.topSection}>
-                <FrequentKBs />
                 <NoteForm />
+                <FrequentKBs />
             </section>
             <Templates />
         </NoteContext.Provider>
