@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import styles from "./_reactPage.module.css";
+
 import Templates from "@/pages/ticketingPointers/reactPage/ticketingTemplates/_Templates";
 import { Template, NoteTop } from "@/utils/models";
 
 import NoteContext from "./utils/_context";
 import NoteForm from "./mainEditor/_MainEditor";
+import FrequentKBs from "./frequentKBs/_FrequentKBs";
 
 export default function ReactPageWrapper(): React.JSX.Element {
     const [mainEditorVal, setMainEditorVal] = useState<string>("");
@@ -48,7 +51,10 @@ export default function ReactPageWrapper(): React.JSX.Element {
                 setTemplates,
             }}
         >
-            <NoteForm />
+            <section className={styles.topSection}>
+                <FrequentKBs />
+                <NoteForm />
+            </section>
             <Templates />
         </NoteContext.Provider>
     );

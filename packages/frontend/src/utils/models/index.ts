@@ -1,19 +1,5 @@
 /* Do not change, this code is generated from Golang structs */
 
-export class Template {
-    template_id: number;
-    name: string;
-    value: string;
-    cc: number;
-
-    constructor(source: any = {}) {
-        if ("string" === typeof source) source = JSON.parse(source);
-        this.template_id = source["template_id"];
-        this.name = source["name"];
-        this.value = source["value"];
-        this.cc = source["cc"];
-    }
-}
 export class Link {
     link_id: number;
     name: string;
@@ -44,6 +30,36 @@ export class NoteTop {
         this.location = source["location"];
         this.affected_user_count = source["affected_user_count"];
         this.issue = source["issue"];
+    }
+}
+export class Template {
+    template_id: number;
+    name: string;
+    value: string;
+    cc: number;
+
+    constructor(source: any = {}) {
+        if ("string" === typeof source) source = JSON.parse(source);
+        this.template_id = source["template_id"];
+        this.name = source["name"];
+        this.value = source["value"];
+        this.cc = source["cc"];
+    }
+}
+export class FrequentKb {
+    fkb_id: number;
+    name: string;
+    kb_num: string;
+    url: string;
+    cc: number;
+
+    constructor(source: any = {}) {
+        if ("string" === typeof source) source = JSON.parse(source);
+        this.fkb_id = source["fkb_id"];
+        this.name = source["name"];
+        this.kb_num = source["kb_num"];
+        this.url = source["url"];
+        this.cc = source["cc"];
     }
 }
 

@@ -58,18 +58,15 @@ export default function NoteForm(): React.JSX.Element {
     }
 
     return (
-        <>
-            <h3>main editor</h3>
-            <p>
-                <textarea
-                    className={styles.textarea}
-                    rows={4}
-                    cols={40}
-                    value={mainEditorVal}
-                    onChange={onChangeHandler}
-                />
-            </p>
-        </>
+        <p>
+            <textarea
+                className={styles.textarea}
+                rows={4}
+                cols={40}
+                value={mainEditorVal}
+                onChange={onChangeHandler}
+            />
+        </p>
     );
 }
 
