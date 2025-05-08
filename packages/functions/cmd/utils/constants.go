@@ -1,0 +1,16 @@
+package utils
+
+import "os"
+
+const (
+	POSTGRES_PORT     = 5432
+	POSTGRES_PORT_DEV = 5433
+)
+
+var (
+	POSTGRES_USERNAME = os.Getenv("POSTGRES_USERNAME")
+	POSTGRES_PASSWORD = os.Getenv("POSTGRES_PASSWORD")
+	POSTGRES_DATABASE = os.Getenv("POSTGRES_DATABASE")
+	POSTGRES_HOST     = os.Getenv("POSTGRES_HOST")
+	SST_STAGE         = os.Getenv("SST_STAGE")
+)

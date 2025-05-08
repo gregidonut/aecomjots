@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 
+	"github.com/gregidonut/aecomjots/packages/functions/cmd/application"
 	"github.com/gregidonut/aecomjots/packages/functions/cmd/utils"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -10,6 +11,12 @@ import (
 )
 
 func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	app, err := application.New()
+	if err != nil {
+		return utils.APIServerError(err)
+	}
+	defer app.DB.Close()
+
 	stmt := `
 SELECT JSON_AGG(ROW_TO_JSON(t))
 FROM (
@@ -17,7 +24,7 @@ FROM (
 ) t;
 `
 
-	return utils.Get(stmt)
+	return utils.Get(app, stmt)
 }
 
 func main() {
