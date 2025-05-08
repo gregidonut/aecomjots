@@ -23,8 +23,15 @@ export default function FrequentKBs(): React.JSX.Element {
     }
     return (
         <section>
-            <h3>frequent Kbs</h3>
-            <Table d={data} />
+            <header>
+                <h3>frequent Kbs</h3>
+            </header>
+            <main>
+                <Table d={data} />
+            </main>
+            <footer>
+                <p>ulol</p>
+            </footer>
         </section>
     );
 }
