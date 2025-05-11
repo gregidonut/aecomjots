@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { FrequentKb } from "@/utils/models";
 import Table from "./table/Table";
 import axios from "axios";
+import CreateForm from "./createForm/_CreateForm";
 
 export default function FrequentKBs(): React.JSX.Element {
-    const { data, isLoading } = useQuery<FrequentKb[]>({
+    const { data, isLoading, refetch } = useQuery<FrequentKb[]>({
         queryKey: ["frequentKbs"],
         queryFn: async function () {
             const resp = await axios({
@@ -33,7 +34,7 @@ export default function FrequentKBs(): React.JSX.Element {
                 <Table d={data} />
             </main>
             <footer>
-                <p>ulol</p>
+                <CreateForm refetch={refetch} />
             </footer>
         </section>
     );
