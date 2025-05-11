@@ -30,7 +30,19 @@ export default function FrequentKBs(): React.JSX.Element {
                 <Table d={data} />
             </main>
             <footer>
-                <p>ulol</p>
+                <form method="POST" action="/frequentKbs">
+                    {["name", "kb_num", "url"].map(function (
+                        e: string,
+                        i: number,
+                    ): React.JSX.Element {
+                        return (
+                            <p key={i}>
+                                <label htmlFor={e}>{e}:</label>
+                                <input type="text" name={e} id={e} />
+                            </p>
+                        );
+                    })}
+                </form>
             </footer>
         </section>
     );

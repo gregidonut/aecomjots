@@ -60,8 +60,11 @@ addProtectedGoRoute(
   "GET /templates",
   "packages/functions/cmd/handlers/templates/main.go",
 );
-
 addProtectedGoRoute(
   "GET /frequentKbs",
   "packages/functions/cmd/handlers/frequentKbs/main.go",
+);
+addProtectedGoRoute(
+  "POST /frequentKbs",
+  "packages/functions/cmd/handlers/frequentKbsCreate/main.go",
 );

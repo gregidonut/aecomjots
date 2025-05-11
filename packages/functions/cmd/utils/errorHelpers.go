@@ -19,8 +19,8 @@ func APIServerError(err error) (events.APIGatewayProxyResponse, error) {
 	}, err
 }
 
-func APIClientError(status int, message string) (events.APIGatewayProxyResponse, error) {
-	body, _ := json.Marshal(errorResponse{Error: message})
+func APIClientError(status int, err error) (events.APIGatewayProxyResponse, error) {
+	body, _ := json.Marshal(errorResponse{Error: err.Error()})
 	return events.APIGatewayProxyResponse{
 		StatusCode: status,
 		Body:       string(body),
