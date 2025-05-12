@@ -3,9 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"errors"
-	"fmt"
-	"net/http"
 
 	"github.com/gregidonut/aecomjots/packages/functions/cmd/application"
 	"github.com/gregidonut/aecomjots/packages/functions/cmd/models"
@@ -16,16 +13,9 @@ import (
 )
 
 func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	if event.HTTPMethod != "POST" {
-		return utils.APIClientError(http.StatusMethodNotAllowed, errors.New("method not allowed"))
-	}
 	var kb models.FrequentKb
-	err := json.Unmarshal([]byte(event.Body), &kb)
-	if err != nil {
-		return events.APIGatewayProxyResponse{
-			StatusCode: http.StatusBadRequest,
-			Body:       fmt.Sprintf("Invalid JSON: %v", err),
-		}, nil
+	if err := json.Unmarshal([]byte(event.Body), &kb); err != nil {
+		return utils.APIServerError(err)
 	}
 
 	app, err := application.New()
