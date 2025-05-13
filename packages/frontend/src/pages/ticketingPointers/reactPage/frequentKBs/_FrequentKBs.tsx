@@ -3,6 +3,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FrequentKb } from "@/utils/models";
 import Table from "./table/Table";
+import CreateForm from "./createForm/_CreateForm";
 
 export default function FrequentKBs(): React.JSX.Element {
     const { data, isLoading } = useQuery<FrequentKb[]>({
@@ -30,33 +31,7 @@ export default function FrequentKBs(): React.JSX.Element {
                 <Table d={data} />
             </main>
             <footer>
-                <form method="POST" action="/api/frequentKbsCreate">
-                    {["name", "kb_num", "url"].map(function (
-                        e: string,
-                        i: number,
-                    ): React.JSX.Element {
-                        if (i !== 2) {
-                            return (
-                                <p key={i}>
-                                    <label htmlFor={e}>{e}:</label>
-                                    <input
-                                        type="text"
-                                        name={e}
-                                        id={e}
-                                        required
-                                    />
-                                </p>
-                            );
-                        }
-                        return (
-                            <p key={i}>
-                                <label htmlFor={e}>{e}:</label>
-                                <input type="text" name={e} id={e} />
-                            </p>
-                        );
-                    })}
-                    <button type="submit">submit</button>
-                </form>
+                <CreateForm />
             </footer>
         </section>
     );
