@@ -3,14 +3,17 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FrequentKb } from "@/utils/models";
 import Table from "./table/Table";
+import axios from "axios";
 
 export default function FrequentKBs(): React.JSX.Element {
     const { data, isLoading } = useQuery<FrequentKb[]>({
         queryKey: ["frequentKbs"],
         queryFn: async function () {
-            const resp = await fetch("/api/frequentKbs");
-            const data = await resp.json();
-            return data;
+            const resp = await axios({
+                method: "get",
+                url: " /api/frequentKbs",
+            });
+            return resp.data;
         },
     });
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 import styles from "./_reactPage.module.css";
@@ -17,9 +18,8 @@ export default function ReactPageWrapper(): React.JSX.Element {
     const { data, isLoading } = useQuery<Template[]>({
         queryKey: ["templates"],
         queryFn: async function () {
-            const resp = await fetch("/api/templates");
-            const data = await resp.json();
-            return data;
+            const resp = await axios({ method: "get", url: "/api/templates" });
+            return resp.data;
         },
     });
 
