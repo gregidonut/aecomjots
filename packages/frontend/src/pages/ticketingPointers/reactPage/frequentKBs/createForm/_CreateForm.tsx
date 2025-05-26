@@ -163,7 +163,10 @@ export default function CreateForm(): React.JSX.Element {
                     );
                 }}
             />
-            <button onClick={form.handleSubmit}>submit</button>
+            <button onClick={form.handleSubmit} disabled={mutation.isPending}>
+                submit
+            </button>
+            {mutation.isPending && <p>adding...</p>}
         </form>
     );
 }
