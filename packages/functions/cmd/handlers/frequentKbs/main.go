@@ -20,7 +20,7 @@ func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.A
 	stmt := `
 SELECT JSON_AGG(ROW_TO_JSON(t))
 FROM (
-  SELECT fkb_id, name, kb_num, cc FROM frequent_kbs
+  SELECT fkb_id, name, kb_num, url, cc FROM frequent_kbs
 ) t;
 `
 
