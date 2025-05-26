@@ -66,5 +66,5 @@ addProtectedGoRoute(
 );
 addProtectedGoRoute(
   "POST /frequentKbs",
-  "packages/functions/cmd/handlers/frequentKbsCreate/main.go",
+  "packages/functions/cmd/handlers/frequentKbsPost/main.go",
 );

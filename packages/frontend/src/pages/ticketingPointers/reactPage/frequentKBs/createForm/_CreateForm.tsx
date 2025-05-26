@@ -20,7 +20,7 @@ export default function CreateForm(): React.JSX.Element {
             kb_num: string;
             url: string;
         }) {
-            return axios.post("/api/frequentKbsCreate", kb);
+            return axios.post("/api/frequentKbsPost", kb);
         },
     });
 
