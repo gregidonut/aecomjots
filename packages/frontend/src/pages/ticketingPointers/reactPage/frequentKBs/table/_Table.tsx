@@ -26,7 +26,10 @@ const columns = [
         header: "---",
         cell: (info) => {
             const url = info.row.original.url;
-            return <a href={url}>{info.getValue()}</a>;
+            if (url) {
+                return <a href={url}>{info.getValue()}</a>;
+            }
+            return <p>{info.getValue()}</p>;
         },
     }),
     columnHelper.display({
