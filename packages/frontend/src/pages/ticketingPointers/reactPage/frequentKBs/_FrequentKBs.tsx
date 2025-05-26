@@ -1,22 +1,17 @@
 import React from "react";
 
-import { useQuery } from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
+
+import { useTPointers } from "../_tPointersQueries";
 import { FrequentKb } from "@/utils/models";
-import Table from "./table/Table";
-import axios from "axios";
+import Table from "./table/_Table";
 import CreateForm from "./createForm/_CreateForm";
 
 export default function FrequentKBs(): React.JSX.Element {
-    const { data, isLoading, refetch } = useQuery<FrequentKb[]>({
-        queryKey: ["frequentKbs"],
-        queryFn: async function () {
-            const resp = await axios({
-                method: "get",
-                url: " /api/frequentKbs",
-            });
-            return resp.data;
-        },
-    });
+    const [, { data, isLoading }] = useTPointers() as [
+        any,
+        UseQueryResult<FrequentKb[]>,
+    ];
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -31,10 +26,10 @@ export default function FrequentKBs(): React.JSX.Element {
                 <h3>frequent Kbs</h3>
             </header>
             <main>
-                <Table d={data} />
+                <Table />
             </main>
             <footer>
-                <CreateForm refetch={refetch} />
+                <CreateForm />
             </footer>
         </section>
     );

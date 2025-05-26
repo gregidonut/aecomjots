@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
 
+import { useTPointers } from "./_tPointersQueries";
 import styles from "./_reactPage.module.css";
 
 import Templates from "@/pages/ticketingPointers/reactPage/ticketingTemplates/_Templates";
@@ -15,13 +15,10 @@ export default function ReactPageWrapper(): React.JSX.Element {
     const [mainEditorVal, setMainEditorVal] = useState<string>("");
     const [templates, setTemplates] = useState<Template[]>([]);
     const [currentNoteTop, setCurrentNoteTop] = useState<NoteTop | null>(null);
-    const { data, isLoading } = useQuery<Template[]>({
-        queryKey: ["templates"],
-        queryFn: async function () {
-            const resp = await axios({ method: "get", url: "/api/templates" });
-            return resp.data;
-        },
-    });
+    const [{ data, isLoading }] = useTPointers() as [
+        UseQueryResult<Template[]>,
+        any,
+    ];
 
     useEffect(
         function (): void {

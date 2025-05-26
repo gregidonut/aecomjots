@@ -1,5 +1,5 @@
 import React, { type PropsWithChildren } from "react";
-import styles from "./actionButton.module.css";
+import styles from "./_actionButton.module.css";
 import { FrequentKb } from "@/utils/models";
 import { type CellContext } from "@tanstack/react-table";
 

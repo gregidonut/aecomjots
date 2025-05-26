@@ -1,21 +1,19 @@
 import React from "react";
+
 import axios from "axios";
 import { useForm } from "@tanstack/react-form";
-import {
-    useMutation,
-    type QueryObserverResult,
-    type RefetchOptions,
-} from "@tanstack/react-query";
+import { useMutation, type UseQueryResult } from "@tanstack/react-query";
 import { z } from "zod";
+
+import { useTPointers } from "../../_tPointersQueries";
 import { FrequentKb } from "@/utils/models";
 
-export default function CreateForm({
-    refetch,
-}: {
-    refetch: (
-        options?: RefetchOptions | undefined,
-    ) => Promise<QueryObserverResult<FrequentKb[], Error>>;
-}): React.JSX.Element {
+export default function CreateForm(): React.JSX.Element {
+    const [, { refetch }] = useTPointers() as [
+        any,
+        UseQueryResult<FrequentKb[]>,
+    ];
+
     const mutation = useMutation({
         mutationFn: function (kb: {
             name: string;
@@ -33,7 +31,6 @@ export default function CreateForm({
             url: "",
         },
         onSubmit: async function ({ formApi, value }) {
-            console.log(value);
             await mutation.mutateAsync({
                 ...value,
                 kb_num: `KB${value.kb_num}`,

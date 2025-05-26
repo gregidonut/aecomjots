@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import type { UseQueryResult } from "@tanstack/react-query";
+
 import {
     useReactTable,
     getCoreRowModel,
     flexRender,
     createColumnHelper,
 } from "@tanstack/react-table";
+import { useTPointers } from "../../_tPointersQueries";
 import { FrequentKb } from "@/utils/models";
-import styles from "./table.module.css";
-import ActionButton from "./actionButton/ActionButton";
+import styles from "./_table.module.css";
+import ActionButton from "./actionButton/_ActionButton";
 
 const columnHelper = createColumnHelper<FrequentKb>();
 const columns = [
@@ -23,7 +26,7 @@ const columns = [
         header: "---",
         cell: (info) => {
             const url = info.row.original.url;
-            return <p>{info.getValue()}</p>;
+            return <a href={url}>{info.getValue()}</a>;
         },
     }),
     columnHelper.display({
@@ -34,13 +37,10 @@ const columns = [
         },
     }),
 ];
-export default function Table({ d }: { d: FrequentKb[] }): React.JSX.Element {
-    const [data, setData] = useState<FrequentKb[]>([]);
-    useEffect(function (): void {
-        setData(d);
-    }, []);
+export default function Table(): React.JSX.Element {
+    const [, { data }] = useTPointers() as [any, UseQueryResult<FrequentKb[]>];
     const table = useReactTable({
-        data,
+        data: data ?? [],
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
