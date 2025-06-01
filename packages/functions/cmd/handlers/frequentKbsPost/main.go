@@ -24,7 +24,7 @@ func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.A
 	}
 	defer app.DB.Close()
 
-	return utils.Create(app, kb)
+	return utils.Post(app, kb)
 }
 
 func main() {

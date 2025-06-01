@@ -13,7 +13,7 @@ type SimpleRow interface {
 	models.FrequentKb | models.Link | models.NoteTop | models.Template
 }
 
-func Create[T SimpleRow](app appinterface.App,
+func Post[T SimpleRow](app appinterface.App,
 	row T,
 ) (events.APIGatewayProxyResponse, error) {
 	switch r := any(row).(type) {
