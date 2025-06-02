@@ -1,16 +1,18 @@
-import React from "react";
-import type { UseQueryResult } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { type UseQueryResult } from "@tanstack/react-query";
 
 import {
     useReactTable,
     getCoreRowModel,
     flexRender,
     createColumnHelper,
+    type RowData,
 } from "@tanstack/react-table";
 import { useTPointers } from "../../_tPointersQueries";
 import { FrequentKb } from "@/utils/models";
 import styles from "./_table.module.css";
 import ActionButton from "./actionButton/_ActionButton";
+import EditableCell from "./editableCell/_EditableCell";
 
 const columnHelper = createColumnHelper<FrequentKb>();
 const columns = [
@@ -20,11 +22,11 @@ const columns = [
     }),
     columnHelper.accessor("kb_num", {
         header: "code",
-        cell: (info) => <code>{info.getValue()}</code>,
+        cell: EditableCell,
     }),
     columnHelper.accessor("name", {
         header: "---",
-        cell: (info) => {
+        cell: function (info) {
             const url = info.row.original.url;
             if (url) {
                 return <a href={url}>{info.getValue()}</a>;
@@ -33,19 +35,72 @@ const columns = [
         },
     }),
     columnHelper.display({
-        id: "actions",
+        id: "editAction",
         header: "",
-        cell: (info) => {
-            return <ActionButton info={info}>action</ActionButton>;
+        cell: function (info) {
+            return (
+                <ActionButton
+                    onClick={function () {
+                        const linkData = info.row.original;
+                        console.log("editButton clicked for:", linkData);
+                    }}
+                >
+                    edit
+                </ActionButton>
+            );
+        },
+    }),
+    columnHelper.display({
+        id: "deleteAction",
+        header: "",
+        cell: function (info) {
+            return (
+                <ActionButton
+                    onClick={function () {
+                        const linkData = info.row.original;
+                        console.log("deleteButton clicked for:", linkData.name);
+                    }}
+                >
+                    delete
+                </ActionButton>
+            );
         },
     }),
 ];
+
+declare module "@tanstack/table-core" {
+    interface TableMeta<TData extends RowData> {
+        updateData: (rowIndex: number, columnId: string, value: string) => void;
+    }
+}
+
 export default function Table(): React.JSX.Element {
     const [, { data }] = useTPointers() as [any, UseQueryResult<FrequentKb[]>];
+    const [d, setD] = useState<FrequentKb[]>(data ?? []);
+
     const table = useReactTable({
-        data: data ?? [],
+        data: d,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        meta: {
+            updateData: function (
+                rowIndex: number,
+                columnId: string,
+                value: string,
+            ) {
+                setD(function (prev: FrequentKb[]): FrequentKb[] {
+                    return prev.map(function (row, i): FrequentKb {
+                        if (i !== rowIndex) {
+                            return row;
+                        }
+                        return {
+                            ...prev[i],
+                            [columnId]: value,
+                        } as FrequentKb;
+                    });
+                });
+            },
+        },
     });
 
     const headerGroups = table.getHeaderGroups();
