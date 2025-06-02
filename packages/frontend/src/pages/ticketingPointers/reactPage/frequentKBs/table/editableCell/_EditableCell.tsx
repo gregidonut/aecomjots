@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import type { CellContext } from "@tanstack/react-table";
 import type { FrequentKb } from "@/utils/models";
+import styles from "./_editableCell.module.css";
 
 export default function EditableCell({
     getValue,
@@ -23,6 +24,7 @@ export default function EditableCell({
     }
     return (
         <input
+            className={styles.input}
             value={val}
             onChange={function (e) {
                 setVal(e.target.value);
