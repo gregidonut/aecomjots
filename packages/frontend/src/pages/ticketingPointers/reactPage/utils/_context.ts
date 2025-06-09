@@ -21,3 +21,9 @@ export default NoteContext;
 export function useNote(): NoteValue | null {
     return useContext(NoteContext);
 }
+
+type EditContextVal = { fkb_id: number; editting: boolean };
+const EditContext = createContext<{
+    setter: Dispatch<SetStateAction<EditContextVal[]>>;
+    editContextVals: EditContextVal[];
+} | null>(null);
